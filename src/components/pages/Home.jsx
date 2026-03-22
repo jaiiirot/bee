@@ -1,6 +1,5 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Award, Zap, ThumbsUp } from 'lucide-react'; // Íconos para la sección de confianza
+import { Icon } from '../atoms/Icon';
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -92,25 +91,25 @@ export const Home = () => {
       </section>
 
       {/* 4. NUEVO: TRUST BADGES (Estilo Spreadshirt "3 Motivos", adaptado a Bee) */}
-      <section className="bg-white py-16 px-6 border-t border-gray-100">
+<section className="bg-white py-16 px-6 border-t border-gray-100">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
           <div className="flex flex-col items-center">
             <div className="w-16 h-16 bg-bee-yellow text-bee-dark rounded-full flex items-center justify-center mb-4">
-              <Award size={32} />
+              <Icon name="award" size={32} />
             </div>
             <h4 className="font-black text-xl mb-2 tracking-wide">Calidad Comprobada</h4>
             <p className="text-gray-600 text-sm leading-relaxed max-w-xs">Trabajamos con las mejores telas y talleres de Mendoza para asegurar que cada prenda resista el paso del tiempo.</p>
           </div>
           <div className="flex flex-col items-center">
             <div className="w-16 h-16 bg-bee-yellow text-bee-dark rounded-full flex items-center justify-center mb-4">
-              <Zap size={32} />
+              <Icon name="zap" size={32} />
             </div>
             <h4 className="font-black text-xl mb-2 tracking-wide">Impresión Premium</h4>
             <p className="text-gray-600 text-sm leading-relaxed max-w-xs">Serigrafía, Bordado, DTF y Termovinilo. Elegimos la técnica perfecta para que tu diseño resalte y no se borre.</p>
           </div>
           <div className="flex flex-col items-center">
             <div className="w-16 h-16 bg-bee-yellow text-bee-dark rounded-full flex items-center justify-center mb-4">
-              <ThumbsUp size={32} />
+              <Icon name="thumbs-up" size={32} />
             </div>
             <h4 className="font-black text-xl mb-2 tracking-wide">Sin Mínimos</h4>
             <p className="text-gray-600 text-sm leading-relaxed max-w-xs">Desde una remera única hasta indumentaria completa para todo tu colegio o empresa. Nos adaptamos a vos.</p>

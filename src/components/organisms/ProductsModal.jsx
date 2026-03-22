@@ -1,5 +1,4 @@
-import React from 'react';
-import { X, Search } from 'lucide-react';
+import { Icon } from '../atoms/Icon';
 
 export const ProductsModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -11,7 +10,7 @@ export const ProductsModal = ({ isOpen, onClose }) => {
         {/* Cabecera del Modal */}
         <div className="flex justify-between items-center p-6 border-b border-gray-100">
           <h2 className="text-2xl font-black text-gray-900">Elegir producto</h2>
-          <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition"><X size={24} /></button>
+          <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition"><Icon name="x" size={24} /></button>
         </div>
 
         {/* Cuerpo del Modal (2 Columnas) */}
@@ -20,7 +19,7 @@ export const ProductsModal = ({ isOpen, onClose }) => {
           {/* Columna Izquierda: Categorías */}
           <div className="w-64 border-r border-gray-100 p-6 overflow-y-auto hidden md:block">
             <div className="relative mb-6">
-              <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
+              <Icon name="search" size={18} />
               <input type="text" placeholder="Buscar..." className="w-full bg-gray-100 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-black" />
             </div>
             <ul className="space-y-1 font-semibold text-gray-600">

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Share2 } from 'lucide-react';
 
 export const RightPanel = ({ selectedColor, setSelectedColor }) => {
   const colors = ['#374151', '#a07884', '#a4d4c8', '#f3f4f6', '#b91c1c', '#1e3a8a', '#15803d', '#ea580c', '#ffffff', '#000000'];
@@ -12,7 +11,7 @@ export const RightPanel = ({ selectedColor, setSelectedColor }) => {
           <h1 className="text-2xl font-black leading-tight">Camiseta prémium ecológica para hombre</h1>
           <a href="#" className="text-sm text-gray-500 underline mt-1 block">Ver detalles del producto</a>
         </div>
-        <button className="text-gray-500 hover:text-black"><Share2 size={20} /></button>
+        <button className="text-gray-500 hover:text-black">aaaa</button>
       </div>
 
       <div className="mb-8">
