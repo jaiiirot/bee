@@ -1,27 +1,38 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '../atoms/Icon';
 
 export const Home = () => {
   const navigate = useNavigate();
 
-  // Datos simulados para la nueva sección estilo Spreadshirt
   const productosPopulares = [
     { id: 1, nombre: "Remera Oversize Premium", precio: "$15.500", img: "/src/assets/img/camisetas1.jpg", colores: ['#131314', '#ffffff', '#b91c1c'] },
     { id: 2, nombre: "Buzo Canguro Egresados", precio: "$32.000", img: "/src/assets/img/buzos-camperas1.jpg", colores: ['#1e3a8a', '#131314', '#15803d'] },
     { id: 3, nombre: "Gorro Trucker Sublimado", precio: "$8.500", img: "/src/assets/img/gorros1.jpg", colores: ['#000000', '#FAE800'] },
-    { id: 4, nombre: "Taza Mágica Cerámica", precio: "$6.000", img: "/src/assets/img/tazas1.jpg", colores: ['#ffffff', '#000000'] }
+    { id: 4, nombre: "Taza Mágica Cerámica", precio: "$6.000", img: "/src/assets/img/tazas1.jpg", colores: ['#ffffff', '#000000'] },
+    { id: 5, nombre: "Chomba Laboral Piqué", precio: "$21.000", img: "/src/assets/img/remeras-y-chombas1.jpg", colores: ['#ffffff', '#1e3a8a', '#131314'] }
   ];
 
   return (
     <div className="flex-1 bg-white flex flex-col overflow-x-hidden">
       
-      {/* 1. HERO SECTION (Intacto, tu diseño original) */}
+      {/* 1. HERO SECTION (Ahora con texto de fondo deslizable) */}
       <main className="relative w-full h-[85vh] md:h-[90vh] flex flex-col items-center justify-end bg-white overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none overflow-hidden pb-20">
-          <h2 className="text-[32vw] font-abril text-bee-dark leading-none tracking-tighter select-none">
-            PERSONA
-          </h2>
+        
+        {/* TEXTO DE FONDO ANIMADO INFINITO */}
+        <div className="absolute top-[15%] w-full flex z-0 select-none pointer-events-none overflow-hidden opacity-90">
+           <div className="animate-marquee-bg">
+             <div className="flex">
+               <h2 className="text-[22vw] font-abril text-bee-dark leading-none mx-4">PERSONALIZACIÓN</h2>
+               <h2 className="text-[22vw] font-abril text-bee-dark leading-none mx-4 text-gray-200">DISEÑO</h2>
+             </div>
+             <div className="flex">
+               <h2 className="text-[22vw] font-abril text-bee-dark leading-none mx-4">PERSONALIZACIÓN</h2>
+               <h2 className="text-[22vw] font-abril text-bee-dark leading-none mx-4 text-gray-200">DISEÑO</h2>
+             </div>
+           </div>
         </div>
+
         <img 
           src="/remerafinal.png" 
           alt="Remera Bee Mendoza" 
@@ -40,7 +51,7 @@ export const Home = () => {
         </div>
       </main>
 
-      {/* 2. MARQUESINA (Intacta) */}
+      {/* 2. MARQUESINA DE SERVICIOS */}
       <div className="bg-white border-y-2 border-bee-gray py-4 overflow-hidden z-20 relative shadow-sm">
         <div className="animate-marquee flex whitespace-nowrap font-abril text-xl md:text-2xl tracking-widest text-bee-dark items-center">
           <div className="flex items-center">
@@ -58,40 +69,36 @@ export const Home = () => {
         </div>
       </div>
 
-      {/* 3. NUEVO: SECCIÓN FAVORITOS (Estilo Spreadshirt pero con tu paleta) */}
-      <section className="bg-gray-50 py-20 px-6">
+      {/* 3. NUEVO: SLIDER DE PRODUCTOS (Deslizable táctil) */}
+      <section className="bg-gray-50 py-20 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <h3 className="font-abril text-3xl md:text-4xl text-bee-dark mb-10 tracking-widest uppercase">Nuestros Favoritos</h3>
+          <h3 className="font-abril text-3xl md:text-4xl text-bee-dark mb-10 tracking-widest uppercase">
+            Descubre la personalización en cada detalle
+          </h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* CONTENEDOR DEL SLIDER (Con scroll y snap) */}
+          <div className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {productosPopulares.map((prod) => (
-              <div key={prod.id} className="bg-white p-5 border border-gray-200 hover:border-black hover:shadow-xl transition-all cursor-pointer group rounded-sm">
+              <div key={prod.id} className="min-w-[280px] md:min-w-[320px] snap-start shrink-0 bg-white p-5 border border-gray-200 hover:border-black hover:shadow-xl transition-all cursor-pointer group rounded-sm flex flex-col">
                 <div className="aspect-square bg-gray-100 mb-4 overflow-hidden flex items-center justify-center">
                   <img src={prod.img} alt={prod.nombre} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 mix-blend-multiply" />
                 </div>
-                {/* Indicadores de colores (Típico de Spreadshirt) */}
                 <div className="flex gap-1.5 mb-3">
                   {prod.colores.map((color, idx) => (
                     <div key={idx} className="w-4 h-4 rounded-full border border-gray-300" style={{ backgroundColor: color }}></div>
                   ))}
-                  <span className="text-xs text-gray-400 ml-1">+{prod.colores.length} colores</span>
+                  <span className="text-xs text-gray-400 ml-1">+{prod.colores.length}</span>
                 </div>
                 <h4 className="font-bold text-gray-900 text-lg leading-tight mb-1">{prod.nombre}</h4>
                 <p className="text-bee-gray font-black">{prod.precio}</p>
               </div>
             ))}
           </div>
-          
-          <div className="mt-10 flex justify-center">
-            <button className="border-2 border-bee-dark text-bee-dark font-black py-3 px-10 hover:bg-bee-dark hover:text-white transition tracking-widest uppercase text-sm">
-              Ver todo el catálogo
-            </button>
-          </div>
         </div>
       </section>
 
-      {/* 4. NUEVO: TRUST BADGES (Estilo Spreadshirt "3 Motivos", adaptado a Bee) */}
-<section className="bg-white py-16 px-6 border-t border-gray-100">
+      {/* 4. TRUST BADGES */}
+      <section className="bg-white py-16 px-6 border-t border-gray-100">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
           <div className="flex flex-col items-center">
             <div className="w-16 h-16 bg-bee-yellow text-bee-dark rounded-full flex items-center justify-center mb-4">
@@ -117,7 +124,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* 5. SECCIÓN CATEGORÍAS (Intacta, tu diseño original de grilla oscura) */}
+      {/* 5. SECCIÓN CATEGORÍAS */}
       <section className="bg-bee-gray text-white py-24 px-6 border-t border-gray-800">
         <div className="max-w-6xl mx-auto">
           <h3 className="font-abril text-4xl md:text-5xl text-bee-yellow text-center mb-16 tracking-wider">MÁS QUE ROPA, IDENTIDAD.</h3>

@@ -44,8 +44,10 @@ export const Chatbot = () => {
     }, 500);
   };
 
-  // MAGIA MARKDOWN: Convierte **texto** en Negrita y \n en saltos de línea
+  // FIX: Salvavidas por si el texto viene vacío o roto
   const formatMessage = (text) => {
+    if (!text) return null;
+    
     return text.split('\n').map((line, i) => (
       <span key={i} className="block mb-1">
         {line.split(/(\*\*.*?\*\*)/).map((chunk, j) => {
@@ -60,7 +62,6 @@ export const Chatbot = () => {
 
   return (
     <>
-      {/* BOTÓN FLOTANTE (Con ícono SVG forzado para asegurar que se vea) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`fixed bottom-6 right-6 w-16 h-16 bg-bee-yellow text-bee-dark rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform z-[100] ${isOpen ? 'rotate-90 opacity-0 pointer-events-none' : 'rotate-0 opacity-100'}`}
@@ -70,11 +71,9 @@ export const Chatbot = () => {
         </svg>
       </button>
 
-      {/* VENTANA DEL CHATBOT (Sin bordes, con sombra premium) */}
       <div 
         className={`fixed bottom-6 right-6 w-[92vw] md:w-[400px] h-[550px] bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] border-0 flex flex-col overflow-hidden transition-all duration-300 z-[100] origin-bottom-right ${isOpen ? 'scale-100 opacity-100' : 'scale-50 opacity-0 pointer-events-none'}`}
       >
-        {/* CABECERA */}
         <div className="bg-[#101010] p-4 flex justify-between items-center text-white shadow-md z-10">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center overflow-hidden shrink-0 border-2 border-bee-yellow p-0.5">
@@ -92,12 +91,11 @@ export const Chatbot = () => {
           </button>
         </div>
 
-        {/* ÁREA DE MENSAJES */}
-        <div className="flex-1 overflow-y-auto p-4 bg-[#f8f9fa] flex flex-col gap-5">
+        {/* Agregado scrollbar-width: none para móviles */}
+        <div className="flex-1 overflow-y-auto p-4 bg-[#f8f9fa] flex flex-col gap-5" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {messages.map((msg, index) => (
             <div key={index} className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}>
               
-              {/* BUBBLE (Globo) Mejorado */}
               <div 
                 className={`w-fit max-w-[85%] p-4 text-sm leading-relaxed shadow-sm break-words ${
                   msg.sender === 'user' 
@@ -105,10 +103,8 @@ export const Chatbot = () => {
                     : 'bg-white text-gray-800 rounded-t-2xl rounded-br-2xl mr-auto'
                 }`}
               >
-                {/* Llama a la función que renderiza negritas y saltos de línea */}
                 {formatMessage(msg.text)}
 
-                {/* Pie de página del bot */}
                 {msg.sender === 'bot' && (
                   <div className="mt-3 pt-2 border-t border-gray-100 text-[9px] text-gray-400 font-bold tracking-wider flex items-center gap-1 uppercase">
                     <Icon name="zap" size={10} className="text-bee-yellow" />
@@ -117,7 +113,6 @@ export const Chatbot = () => {
                 )}
               </div>
 
-              {/* Botones de opciones rápidas */}
               {msg.options && (
                 <div className="flex flex-wrap gap-2 mt-3">
                   {msg.options.map((opt, i) => (
@@ -136,7 +131,6 @@ export const Chatbot = () => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* ÁREA DE INPUT */}
         <div className="p-3 bg-white border-t border-gray-100 shadow-[0_-5px_15px_rgba(0,0,0,0.02)]">
           <form 
             onSubmit={(e) => { e.preventDefault(); handleSend(inputValue); }}

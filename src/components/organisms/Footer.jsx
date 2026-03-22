@@ -71,14 +71,14 @@ export const Footer = () => {
               <li><Link to="/catalogo?cat=merchandising" className="hover:text-bee-yellow transition">Merchandising y Objetos</Link></li>
             </ul>
           </div>
-
-          <div className="flex flex-col">
+<div className="flex flex-col">
             <h4 className="text-white font-black tracking-widest mb-6 uppercase text-sm">Ayuda y Servicio</h4>
             <ul className="space-y-3 text-sm font-medium">
               <li><Link to="/nosotros" className="hover:text-bee-yellow transition">Sobre Nosotros</Link></li>
               <li><Link to="/contacto" className="hover:text-bee-yellow transition">Contacto</Link></li>
-              <li><a href="#" className="hover:text-bee-yellow transition">Guía de Talles</a></li>
-              <li><a href="#" className="hover:text-bee-yellow transition">Técnicas de Estampado</a></li>
+              {/* CONECTAMOS ESTOS DOS LINKS: */}
+              <li><Link to="/talles" className="hover:text-bee-yellow transition">Guía de Talles</Link></li>
+              <li><Link to="/estampados" className="hover:text-bee-yellow transition">Técnicas de Estampado</Link></li>
             </ul>
           </div>
 

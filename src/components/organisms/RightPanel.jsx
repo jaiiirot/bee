@@ -28,11 +28,16 @@ export const RightPanel = ({ selectedColor, setSelectedColor }) => {
         </div>
       </div>
 
-      <div className="mb-8">
+    <div className="mb-8">
         <div className="flex items-center gap-2 mb-3">
           <p className="text-[11px] font-bold text-gray-500 uppercase">Elegir talla y cantidad</p>
           <span className="text-gray-300">•</span>
-          <a href="#" className="text-xs underline text-black font-medium">Guía de tallas</a>
+          
+          {/* CONECTAMOS LA GUÍA DE TALLES DEL EDITOR: */}
+          <Link to="/talles" target="_blank" className="text-xs underline text-black font-medium hover:text-bee-yellow transition">
+            Guía de tallas
+          </Link>
+          
         </div>
         <div className="flex flex-wrap gap-2">
           {sizes.map(size => (

@@ -20,6 +20,7 @@ export const EditorPage = () => {
     });
     fabricCanvas.current.add(text);
     fabricCanvas.current.setActiveObject(text);
+    fabricCanvas.current.requestRenderAll(); // FIX: Forzar renderizado
   };
 
   const handleAddShape = () => {
@@ -29,9 +30,9 @@ export const EditorPage = () => {
     });
     fabricCanvas.current.add(rect);
     fabricCanvas.current.setActiveObject(rect);
+    fabricCanvas.current.requestRenderAll(); // FIX: Forzar renderizado
   };
 
-  // Validación extra para asegurar que se abra el explorador de archivos
   const handleUploadClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
@@ -52,10 +53,11 @@ export const EditorPage = () => {
         fabricCanvas.current.add(fabricImage);
         fabricCanvas.current.centerObject(fabricImage);
         fabricCanvas.current.setActiveObject(fabricImage);
+        fabricCanvas.current.requestRenderAll(); // FIX: Forzar renderizado
       };
     };
     reader.readAsDataURL(file);
-    e.target.value = ''; // Limpiamos el input para poder subir la misma foto 2 veces seguidas si se quiere
+    e.target.value = ''; 
   };
 
   const handleDelete = () => {
@@ -64,14 +66,12 @@ export const EditorPage = () => {
     if (activeObjects.length) {
       activeObjects.forEach(obj => fabricCanvas.current.remove(obj));
       fabricCanvas.current.discardActiveObject();
+      fabricCanvas.current.requestRenderAll(); // FIX: Limpiar basura de la pantalla
     }
   };
 
   return (
-    // Calculamos el alto de la pantalla menos el Navbar (~76px) para que no haya scroll innecesario
-    <div className="flex w-full bg-white font-sans text-gray-800 overflow-hidden" style={{ height: 'calc(100vh - 76px)' }}>
-      
-      {/* Input de subida oculto pero dentro del flujo para no perder referencia */}
+    <div className="flex w-full bg-white font-sans text-gray-800 overflow-hidden" style={{ height: 'calc(100dvh - 76px)' }}>
       <input type="file" ref={fileInputRef} onChange={handleFileChange} accept="image/*" className="hidden" />
 
       <LeftSidebar 
@@ -82,13 +82,11 @@ export const EditorPage = () => {
         onOpenProducts={() => setIsProductsModalOpen(true)}
       />
       
-      {/* AHORA SÍ LE PASAMOS EL COLOR AL WORKSPACE */}
       <Workspace canvasRef={canvasRef} fabricCanvas={fabricCanvas} color={selectedColor} />
       
       <RightPanel selectedColor={selectedColor} setSelectedColor={setSelectedColor} />
 
       <ProductsModal isOpen={isProductsModalOpen} onClose={() => setIsProductsModalOpen(false)} />
-      
     </div>
   );
 };
